@@ -1,22 +1,43 @@
 # Agile611 Ansible Lamp Project
 [![Agile611](https://www.agile611.com/wp-content/uploads/2020/09/cropped-logo-header.png)](http://www.agile611.com/)
 
-**Ejemplo completo** y listo para usar de cómo desplegar en la arquitectura (arquitectura-ansible.pdf) con **Ansible**, usando:
+**Entorno completo** y listo para usar de cómo desplegar en la arquitectura (arquitectura-ansible.pdf) usando **Vagrant**.
 
-- **Apache2** y **PHP** en el webserver (**192.168.11.40**)  
-- **MySQL** en database (**192.168.11.20**)  
-- **Nginx** como balanceador en loadbalancer (**192.168.11.30**)  
-- **WordPress** instalado y configurado  
-- **Ansible** ejecutándose desde control (**192.168.11.10**, solo para lanzar los playbooks)
+## Creación del entorno de trabajo
+### Requisitos para la virtualización
 
----
-Clone this repository with:
+Estas máquinas deben soportar la virtualización.  
+Si no puedes virtualizar desde el inicio en tu máquina, es posible que necesites activar el **VT-X** en la BIOS de tu equipo.  
+Aquí tienes una guía para activar la virtualización en la BIOS si no está habilitada:  
+[Habilitar la virtualización de hardware en BIOS/UEFI en PC (VT-X y AMD-V)](https://assistouest.fr/es/habilitar-la-virtualizacion-de-hardware-en-bios-uefi-en-pc-vt-x-y-amd-v/)
+
+Además, debes instalar las siguientes aplicaciones en tu máquina:
+
+- **Git**: [Descargar aquí](https://git-scm.com/downloads)  
+- **Vagrant**: [Descargar aquí](https://www.vagrantup.com/downloads.html)  
+- **VirtualBox**: [Descargar aquí](https://www.virtualbox.org/wiki/Downloads)  
+
+### Tutoriales para instalar Vagrant en diferentes plataformas para arrancar el entorno:
+
+- **Windows**: [Cómo instalar Vagrant en Windows](https://www.youtube.com/watch?v=mPBWWu7sZU4)  
+- **MacOS**: [Cómo instalar Vagrant en MacOS](https://www.youtube.com/watch?v=kCVsWyR8mbo)  
+- **Linux**: [Cómo instalar Vagrant en Linux](https://www.youtube.com/watch?v=yGviTwD3hWM)  
+
+### Nota importante
+
+Vagrant busca las máquinas en repositorios remotos de [Hashicorp](http://hashicorp.com), por lo que te recomendamos **desconectar cualquier conexión VPN activa** que tengas en tu máquina.  
+
+Para que el entorno funcione correctamente, debes tener instaladas las tres aplicaciones: **Git**, **Vagrant** y **VirtualBox**.
+
+--- 
+
+## Configuración inicial de Vagrant
+
+Clonar este repositorio:
 
 ```shell
 git clone https://github.com/agile611/ansible-lamp-project.git
 ```
-
-## Configuración inicial
 
 * Para iniciar el entorno, vamos a necesitar 4 VMs de Ubuntu (ansible, loadbalancer, database y webserver)
 
@@ -33,6 +54,16 @@ vagrant@ansible$ ssh-copy-id vagrant@192.168.11.20
 vagrant@ansible$ ssh-copy-id vagrant@192.168.11.30
 vagrant@ansible$ ssh-copy-id vagrant@192.168.11.40
 ```
+
+---
+
+Con **Ansible**, una vez levantado el entorno **Vagrant** usando:
+
+- **Apache2** y **PHP** en el webserver (**192.168.11.40**)  
+- **MySQL** en database (**192.168.11.20**)  
+- **Nginx** como balanceador en loadbalancer (**192.168.11.30**)  
+- **WordPress** instalado y configurado  
+- **Ansible** ejecutándose desde control (**192.168.11.10**, solo para lanzar los playbooks)
 
 ---
 
