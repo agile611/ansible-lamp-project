@@ -1,7 +1,9 @@
 ---
 - name: Instalar MySQL Server
   apt:
-    name: mysql-server
+    name: 
+      - mysql-server
+      - mysql-python3
     state: present
     update_cache: yes
 
