@@ -20,7 +20,7 @@
 
 - name: Crear base de datos
   mysql_db:
-    name: {{ mysql_database }}
+    name: "{{ mysql_database }}"
     state: present
     login_user: root #Podemos poner otro usuario si lo deseamos
     login_password: "{{ mysql_root_password }}"
