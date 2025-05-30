@@ -7,7 +7,7 @@
 
 - name: Iniciar servicio MySQL
   service:
-    name: mysqld
+    name: mysql
     state: started
     enabled: true
 
