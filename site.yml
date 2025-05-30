@@ -3,19 +3,19 @@
   hosts: dbservers
   become: true
   vars_files:
-    - ../vault/secrets.yml
+    - vault/secrets.yml
   roles:
-    - role: mysql
+    - mysql
 
 - name: Configurar servidores web
   hosts: webservers
   become: true
   vars_files:
-    - ../vault/secrets.yml
+    - vault/secrets.yml
   roles:
-    - role: apache
-    - role: php
-    - role: app
+    - apache
+    - php
+    - app
 
 - name: Configurar balanceador de carga
   hosts: loadbalancers
@@ -23,5 +23,5 @@
   vars:
     is_load_balancer: true
   roles:
-    - role: nginx
+    - nginx
     
