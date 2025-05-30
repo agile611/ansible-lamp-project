@@ -110,13 +110,13 @@ loadbalancer ansible_host=192.168.11.30
 1. Prepara las 4 máquinas con Ubuntu Server y acceso SSH.
 2. Clona este repositorio de Ansible en la máquina control.
 3. Rellena las IPs en `inventory.ini` y ajusta variables según tus necesidades.
-4. Cifra los secretos:
+4. Cifra los secretos (opcional para que pase a ser productivo):
    ```sh
    ansible-vault encrypt vault/secrets.yml
    ```
 5. Ejecuta el playbook:
    ```sh
-   ansible-playbook -i inventory.ini playbooks/site.yml --ask-become-pass
+   ansible-playbook -i inventory.ini playbooks/site.yml
    ```
 6. Accede a `http://192.168.11.30` y deberías ver el instalador de WordPress.
 
