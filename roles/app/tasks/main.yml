@@ -32,10 +32,9 @@
     recurse: yes
 
 - name: Copiar archivo de configuración de WordPress
-  copy:
+  template:
     src: wp-config.php.j2
     dest: /var/www/html/wp-config.php
-    remote_src: yes
     owner: www-data
     group: www-data
     mode  : '0640'
