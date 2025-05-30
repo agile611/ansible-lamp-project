@@ -17,6 +17,9 @@
   mysql_user:
     name: root
     password: "{{ vault_mysql_root_password }}"
+    host: localhost
+    login_user: root #Podemos poner otro usuario si lo deseamos
+    login_password: "{{ vault_mysql_root_password }}"
 
 - name: Crear base de datos
   mysql_db:
