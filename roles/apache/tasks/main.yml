@@ -5,16 +5,6 @@
     state: present
     update_cache: yes
 
-- name: Habilitar módulos de Apache
-  apache2_module:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - rewrite
-    - proxy
-    - proxy_fcgi
-    - setenvif
-
 - name: Copiar archivo de configuración de Apache
   template:
     src: wordpress.conf.j2
@@ -33,3 +23,13 @@
     owner: www-data
     group: www-data
     recurse: yes
+
+- name: Habilitar módulos de Apache
+  apache2_module:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - rewrite
+    - proxy
+    - proxy_fcgi
+    - setenvif

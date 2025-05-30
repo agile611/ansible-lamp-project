@@ -11,8 +11,7 @@
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-    #Si el balanceador de carga está configurado, preserva la IP real
+    # Si el balanceador de carga está configurado, preserva la IP real
     SetEnvIf X-Forwarded-For "^.*\..*\..*\..*" forwarded_for
     CustomLog ${APACHE_LOG_DIR}/access.log combined env=forwarded_for
-
-</VirtualHost
+</VirtualHost>
