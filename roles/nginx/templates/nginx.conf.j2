@@ -1,16 +1,28 @@
 {% if is_loadbalancer | default(false) %}
-upstream backend {
+upstream app_backend {
     server 192.168.11.40;
 }
 
 server {
-
     listen 80;
+
     location / {
-        proxy_pass http://backend;
+        proxy_pass http://app_backend;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+    }
+
+    # Error handling
+    error_page 502 /error502.html;
+    location = /error502.html {
+        internal;
+        root /usr/share/nginx/html;
     }
 }
 {% endif %}
