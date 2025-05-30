@@ -1,0 +1,15 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for php
+- name: Instalar PHP y extensiones necesarias
+  apt:
+    name: "{{ php_packages }}"
+    state: present
+    update_cache: yes
+  #notify: Restart Apache
+
+- name: Reiniciar Apache para aplicar cambios de PHP
+  service:
+    name: apache2
+    state: restarted
+    enabled: true

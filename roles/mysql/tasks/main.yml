@@ -1,0 +1,35 @@
+---
+- name: Instalar MySQL Server
+  ansible.builtin.yum:
+    name: mysql-server
+    state: present
+    update_cache: yes
+
+- name: Iniciar servicio MySQL
+  service:
+    name: mysqld
+    state: started
+    enabled: true
+
+- name: Configurar la contraseña de root de MySQL
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host: localhost
+    login_unix_socket: /var/lib/mysql/mysql.sock
+
+- name: Crear base de datos
+  mysql_db:
+    name: {{ mysql_database }}
+    state: present
+    login_user: root #Podemos poner otro usuario si lo deseamos
+    login_password: "{{ mysql_root_password }}"
+
+- name: Crear usuario de app wordpressdb
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "{{ mysql_database }}.*:ALL"
+    state: present
+    login_user: root #Podemos poner otro usuario si lo deseamos
+    login_password: "{{ mysql_root_password }}"

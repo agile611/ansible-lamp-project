@@ -1,0 +1,26 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for nginx
+- name:  Instalar Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Copiar archivo de configuración de Nginx
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/wordpress.conf
+  notify: Reiniciar Nginx
+
+- name: Crear enlace simbólico para Nginx
+  file:
+    src: /etc/nginx/sites-available/wordpress.conf
+    dest: /etc/nginx/sites-enabled/wordpress.conf
+    state: link
+
+- name: Asegurar que el servicio Nginx esté habilitado y en ejecución
+  service:
+    name: nginx
+    state: started
+    enabled: true

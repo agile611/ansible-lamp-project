@@ -1,0 +1,35 @@
+---
+- name: Instalar Apache
+  apt:
+    name: apache2
+    state: present
+    update_cache: yes
+
+- name: Habilitar módulos de Apache
+  apache2_module:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - rewrite
+    - proxy
+    - proxy_fcgi
+    - setenvif
+
+- name: Copiar archivo de configuración de Apache
+  template:
+    src: wordpress.conf.j2
+    dest: /etc/apache2/sites-available/000-default.conf
+  notify: Reiniciar Apache
+
+- name: Asegurar que Apache está habilitado
+  service:
+    name: apache2
+    state: started
+    enabled: true 
+
+- name: Dar permisos al directorio de WordPress
+  file:
+    path: /var/www/html
+    owner: www-data
+    group: www-data
+    recurse: yes
