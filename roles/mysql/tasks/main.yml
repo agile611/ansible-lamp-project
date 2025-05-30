@@ -3,7 +3,7 @@
   apt:
     name: 
       - mysql-server
-      - pymysql
+      - python3-mysqldb
     state: present
     update_cache: yes
 
@@ -16,22 +16,20 @@
 - name: Configurar la contraseña de root de MySQL
   mysql_user:
     name: root
-    password: "{{ mysql_root_password }}"
-    host: localhost
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    password: "{{ vault_mysql_root_password }}"
 
 - name: Crear base de datos
   mysql_db:
     name: "{{ mysql_database }}"
     state: present
     login_user: root #Podemos poner otro usuario si lo deseamos
-    login_password: "{{ mysql_root_password }}"
+    login_password: "{{ vault_mysql_root_password }}"
 
 - name: Crear usuario de app wordpressdb
   mysql_user:
     name: "{{ mysql_user }}"
-    password: "{{ mysql_password }}"
+    password: "{{ vault_mysql_password }}"
     priv: "{{ mysql_database }}.*:ALL"
     state: present
     login_user: root #Podemos poner otro usuario si lo deseamos
-    login_password: "{{ mysql_root_password }}"
+    login_password: "{{ vault_mysql_root_password }}"
