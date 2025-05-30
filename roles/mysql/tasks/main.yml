@@ -3,7 +3,6 @@
   apt:
     name: 
       - mysql-server
-      - mysql-python3
       - pymysql
     state: present
     update_cache: yes
