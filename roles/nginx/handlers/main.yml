@@ -1,6 +1,5 @@
 # Handlers para reiniciar Nginx
-handlers:
-  - name: Reiniciar Nginx
-    service:
-      name: nginx
-      state: restarted
+- name: Reiniciar Nginx
+  service:
+    name: nginx
+    state: restarted
