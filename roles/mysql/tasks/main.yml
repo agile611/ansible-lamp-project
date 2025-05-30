@@ -1,6 +1,6 @@
 ---
 - name: Instalar MySQL Server
-  ansible.builtin.yum:
+  apt:
     name: mysql-server
     state: present
     update_cache: yes
